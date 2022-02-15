@@ -1,0 +1,75 @@
+﻿<Window x:Class="AtDrive_Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AtDrive_Test"
+        mc:Ignorable="d"
+        Title="AtDrive" Height="450" Width="800"
+        ResizeMode="NoResize">
+    <Grid>
+
+        <StackPanel Orientation = "Horizontal">
+            <TextBox HorizontalAlignment="Left" Height="26" Margin="27,18,0,0" TextWrapping="Wrap"   
+                 Text="select Main Image" VerticalAlignment="Top" Width="118" Name="MainFileNameTextBox"/>
+            <Button x:Name="MainBrowseButton" Content="Browse a file" HorizontalAlignment="Left"   
+                Margin="1,18,0,0" VerticalAlignment="Top" Width="111" Click="MainBrowseButton_Click"   
+                RenderTransformOrigin="1.047,0.821" Height="26"/>
+            <TextBox HorizontalAlignment="Left" Height="26" Margin="27,18,0,0" TextWrapping="Wrap"   
+                Text="select sub Image" VerticalAlignment="Top" Width="118" x:Name="SubFileNameTextBox" TextAlignment="Left"/>
+            <Button x:Name="SubBrowseButton_Copy" HorizontalAlignment="Left"  Content="Browse a file"   Margin="1,18,0,0"  Width="111" Click="SubBrowseButton_Click"   
+                RenderTransformOrigin="1.047,0.821" VerticalAlignment="Top" Height="26"/>
+            <Button x:Name="Load" HorizontalAlignment="Left" Content="Load" Width="80" Height="26" VerticalAlignment="Top"  Margin="10,18,0,0" Click="LoadButton_Click" >
+
+            </Button>
+
+
+
+        </StackPanel>
+        <Border  BorderThickness = "1"  BorderBrush = "black"  Background = "LightGray"  HorizontalAlignment = "Left"  Width = "180" Margin="620,0,0,0" >
+            <StackPanel Orientation = "Vertical" HorizontalAlignment="Right" >
+                <Label x:Name="Label1"  Content="Distance " Margin="50,8,10,0" Width="200" Height="40" />
+                <TextBox Height="26"  Width="118" Margin="27,1,1,10" Text="250"  x:Name="SpeedXTextBox"  />
+
+                <Label x:Name="Label2"  Content="Height " Margin="50,8,10,0" Width="200" Height="40" />
+                <TextBox   Height="26"  Width="118" Margin="27,1,1,10" Text="250"  x:Name="SpeedYTextBox" />
+
+                <Label x:Name="Label3"  Content="speed  " Margin="50,8,10,0" Width="200" Height="40" />
+                <!--<TextBox Height="26"  Width="118" Margin="27,1,1,10"  x:Name="SpeedComboBox"/>-->
+
+                <ComboBox x:Name="SpeedComboBox" Height="26"  Width="118" Margin="27,1,1,10" SelectionChanged="SpeedComboBox_SelectionChanged" SelectedIndex="2" >
+                    <ComboBoxItem>Slow</ComboBoxItem>
+                    <ComboBoxItem>Medium</ComboBoxItem>
+                    <ComboBoxItem>Fast</ComboBoxItem>
+
+                </ComboBox>
+
+                <Button x:Name="Start" HorizontalAlignment="Center" Content="Start" Width="80" Height="26" VerticalAlignment="Top"  Margin="10,18,0,0" Click="StartButton_Click"  >
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="ButtonBase.Click">
+                            <BeginStoryboard>
+                                <Storyboard x:Name="move" RepeatBehavior="Forever" >
+                                    <DoubleAnimation x:Name="TopDown" Storyboard.TargetName="ballRectangle" BeginTime="0:0:0.0"  Storyboard.TargetProperty="(Window.Top)" From="100.0" To="290.0" Duration="0:0:0.2" />
+                                    <DoubleAnimation x:Name="DownTop" Storyboard.TargetName="ballRectangle" BeginTime="0:0:0.2" Storyboard.TargetProperty="(Window.Top)" From="290.0" To="100.0" Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Button x:Name="Save" HorizontalAlignment="Center" Content="Save as gif" Width="80" Height="26" VerticalAlignment="Top" IsEnabled="False" Margin="10,18,0,0" Click="SaveButton_Click" ></Button>
+            </StackPanel>
+        </Border>
+
+        <Canvas Name="MainCanvas" Width = "590" Height = "360" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,10,0,0">
+
+            <Rectangle Name="ballRectangle" Width="50" Height="50" StrokeThickness="0" Canvas.Left="0" Canvas.Top="250" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft">
+               
+                
+
+            </Rectangle>
+
+        </Canvas>
+
+    </Grid>
+</Window>
